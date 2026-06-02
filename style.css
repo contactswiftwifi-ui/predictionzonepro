@@ -74,10 +74,10 @@ body {
     width: 400px;
     height: 400px;
     background: #D4AF37;
-    bottom: -200px;
-    right: -150px;
+    bottom: -100px;
+    right: -80px;
     animation: float-gold 22s ease-in-out infinite;
-    opacity: 0.15;
+    opacity: 0.2;
 }
 
 @keyframes float-blue {
@@ -167,7 +167,7 @@ body {
 /* Logo */
 .logo-wrapper {
     position: relative;
-    margin-bottom: 32px;
+    margin-bottom: 8px;
     animation: logo-wrapper-in 0.8s ease-out;
 }
 
@@ -473,7 +473,7 @@ body {
     }
 
     .logo-wrapper {
-        margin-bottom: 28px;
+        margin-bottom: 4px;
     }
 }
 
