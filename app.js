@@ -1,205 +1,134 @@
-// PZP Landing Page - Premium Telegram Conversion Page
-// Enhanced with particles, advanced animations, and staggered load sequence
+// PZP Landing Page - cinematic single-screen Telegram landing page
 
 (function() {
     'use strict';
 
-    // Generate floating particles
+    const TELEGRAM_URL = 'https://t.me/+hG27Gt41OrhmYTM1';
+
+    function random(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    function createParticle(container, index, isGold) {
+        const particle = document.createElement('span');
+        const isSpark = Math.random() > 0.9;
+
+        particle.className = `particle${isGold ? ' gold' : ' blue'}${isSpark ? ' spark' : ''}`;
+
+        let x;
+        let y;
+
+        if (isGold) {
+            const clustered = Math.random() > 0.14;
+            x = clustered ? random(66, 101) : random(54, 100);
+            y = clustered ? random(50, 103) : random(34, 100);
+        } else {
+            x = random(0, 100);
+            y = Math.random() > 0.72 ? random(0, 42) : random(0, 100);
+        }
+
+        const size = isSpark ? random(2, 4.2) : random(0.7, isGold ? 3 : 2.6);
+        const opacity = isGold ? random(0.28, 0.82) : random(0.18, 0.76);
+        const duration = random(24, 58);
+        const dx = `${random(-34, 34)}px`;
+        const dy = `${random(-38, 38)}px`;
+
+        particle.style.setProperty('--x', `${x}%`);
+        particle.style.setProperty('--y', `${y}%`);
+        particle.style.setProperty('--size', `${size}px`);
+        particle.style.setProperty('--opacity', opacity.toFixed(2));
+        particle.style.setProperty('--duration', `${duration.toFixed(2)}s`);
+        particle.style.setProperty('--delay', `${random(-58, 0).toFixed(2)}s`);
+        particle.style.setProperty('--dx', dx);
+        particle.style.setProperty('--dy', dy);
+        particle.style.setProperty('--scale', random(0.72, 1.35).toFixed(2));
+        particle.style.setProperty('--glow', `${random(5, isGold ? 14 : 12).toFixed(1)}px`);
+        particle.style.setProperty('--color', isGold ? '#FFC642' : '#15AFFF');
+        particle.style.zIndex = String(index % 3);
+
+        container.appendChild(particle);
+    }
+
     function generateParticles() {
         const container = document.getElementById('particles');
-        const particleCount = 18;
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            
-            // Random size between 1px and 4px
-            const size = Math.random() * 3 + 1;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            
-            // Random position
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
-            particle.style.left = x + '%';
-            particle.style.top = y + '%';
-            
-            // Random opacity between 0.1 and 0.4
-            const opacity = Math.random() * 0.3 + 0.1;
-            particle.style.opacity = opacity;
-            
-            // Random animation duration between 15-30 seconds
-            const duration = Math.random() * 15 + 15;
-            const delay = Math.random() * 5;
-            particle.style.animation = `particle-float ${duration}s linear infinite ${delay}s`;
-            
-            container.appendChild(particle);
+
+        if (!container || container.children.length) {
+            return;
+        }
+
+        const particleCount = window.matchMedia('(max-width: 420px)').matches ? 218 : 299;
+        const goldCount = Math.round(particleCount * 0.15);
+        const blueCount = particleCount - goldCount;
+
+        for (let i = 0; i < blueCount; i++) {
+            createParticle(container, i, false);
+        }
+
+        for (let i = 0; i < goldCount; i++) {
+            createParticle(container, blueCount + i, true);
         }
     }
 
-    // Add particle animation keyframes dynamically
-    function injectParticleStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes particle-float {
-                0% {
-                    transform: translate(0, 0) scale(1);
-                }
-                25% {
-                    transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0.8);
-                }
-                50% {
-                    transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(1.1);
-                }
-                75% {
-                    transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0.9);
-                }
-                100% {
-                    transform: translate(0, 0) scale(1);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
+    function initializeInteractions() {
+        const telegramButton = document.querySelector('.telegram-button');
+        const heroSection = document.getElementById('hero-section');
 
-    // Create individual animations for each particle using CSS
-    function createParticleAnimations() {
-        const style = document.createElement('style');
-        let keyframes = '';
-        
-        for (let i = 0; i < 18; i++) {
-            const moveX = (Math.random() - 0.5) * 200;
-            const moveY = (Math.random() - 0.5) * 200;
-            const duration = Math.random() * 15 + 15;
-            
-            keyframes += `
-                .particle:nth-child(${i + 1}) {
-                    animation: particle-float-${i} ${duration}s ease-in-out infinite !important;
+        if (telegramButton) {
+            telegramButton.addEventListener('click', function() {
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
                 }
-                
-                @keyframes particle-float-${i} {
-                    0%, 100% {
-                        transform: translate(0, 0) scale(1);
-                        opacity: var(--particle-opacity);
-                    }
-                    50% {
-                        transform: translate(${moveX}px, ${moveY}px) scale(1.2);
-                        opacity: calc(var(--particle-opacity) * 0.5);
-                    }
-                }
-            `;
+            });
+
+            telegramButton.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            }, { passive: true });
+
+            telegramButton.addEventListener('touchend', function() {
+                this.style.transform = '';
+            }, { passive: true });
         }
-        
-        style.textContent = keyframes;
-        document.head.appendChild(style);
+
+        if (heroSection) {
+            heroSection.style.cursor = 'pointer';
+            heroSection.addEventListener('click', function(event) {
+                if (event.target.closest('.telegram-button')) {
+                    return;
+                }
+
+                window.open(TELEGRAM_URL, '_blank');
+
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            });
+        }
     }
 
-    // Initialize animations on page load
-    function initializeAnimations() {
-        // Get all animated elements
-        const background = document.querySelector('.background');
+    function preloadLogo() {
         const logo = document.querySelector('.logo');
-        const badge = document.querySelector('.premium-badge');
-        const headline = document.querySelector('.headline');
-        const subtitle = document.querySelector('.subtitle');
-        const button = document.querySelector('.telegram-button');
-        
-        // Staggered entrance animation sequence
-        const sequence = [
-            { element: background, delay: 0 },
-            { element: logo, delay: 100 },
-            { element: badge, delay: 200 },
-            { element: headline, delay: 300 },
-            { element: subtitle, delay: 400 },
-            { element: button, delay: 500 }
-        ];
-        
-        // Log animation sequence start
-        console.log('PZP Landing Page loaded - Animation sequence started');
+
+        if (logo && logo.src) {
+            const img = new Image();
+            img.src = logo.src;
+        }
     }
 
-    // Prevent accidental selection during animations
-    document.addEventListener('selectstart', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
+    document.addEventListener('selectstart', function(event) {
+        if (event.target.tagName === 'IMG') {
+            event.preventDefault();
         }
     });
 
-    // Optimize for mobile - prevent pull-to-refresh on Chrome
-    document.addEventListener('touchmove', function(e) {
-        if (e.touches.length > 1) {
-            e.preventDefault();
+    document.addEventListener('touchmove', function(event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
         }
     }, { passive: false });
 
-    // Enhance button interaction for mobile
-    const telegramButton = document.querySelector('.telegram-button');
-    
-    if (telegramButton) {
-        // Add haptic feedback on mobile (if available)
-        telegramButton.addEventListener('click', function(e) {
-            if (navigator.vibrate) {
-                navigator.vibrate(10);
-            }
-        });
-
-        // Smooth interaction feedback
-        telegramButton.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.97)';
-        });
-
-        telegramButton.addEventListener('touchend', function() {
-            this.style.transform = '';
-        });
-    }
-
-    // Make entire hero section clickable
-    const heroSection = document.getElementById('hero-section');
-    if (heroSection) {
-        heroSection.style.cursor = 'pointer';
-        heroSection.addEventListener('click', function(e) {
-            // Don't trigger if clicking the button itself
-            if (e.target.closest('.telegram-button')) {
-                return;
-            }
-            // Open Telegram
-            window.open('https://t.me/+hG27Gt41OrhmYTM1', '_blank');
-            if (navigator.vibrate) {
-                navigator.vibrate(10);
-            }
-        });
-
-        // Add touch feedback to hero section
-        heroSection.addEventListener('touchstart', function() {
-            this.style.opacity = '0.95';
-        });
-
-        heroSection.addEventListener('touchend', function() {
-            this.style.opacity = '1';
-        });
-    }
-
-    // Preload logo for instant display
-    const logo = document.querySelector('.logo');
-    if (logo && logo.src) {
-        const img = new Image();
-        img.src = logo.src;
-    }
-
-    // Generate particles on DOM ready
     document.addEventListener('DOMContentLoaded', function() {
         generateParticles();
-        createParticleAnimations();
-        initializeAnimations();
+        initializeInteractions();
+        preloadLogo();
     });
-
-    // Log page load performance
-    if (window.performance && window.performance.timing) {
-        window.addEventListener('load', function() {
-            const pageLoadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
-            console.log('Page fully loaded in ' + pageLoadTime + 'ms');
-        });
-    }
-
 })();
-
