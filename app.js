@@ -56,7 +56,7 @@
             return;
         }
 
-        const particleCount = window.matchMedia('(max-width: 420px)').matches ? 218 : 299;
+        const particleCount = window.matchMedia('(max-width: 420px)').matches ? 240 : 329;
         const goldCount = Math.round(particleCount * 0.15);
         const blueCount = particleCount - goldCount;
 

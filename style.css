@@ -132,13 +132,13 @@ a {
     bottom: -42vw;
     border-radius: 50%;
     background:
-        radial-gradient(circle at 23% 19%, transparent 0 46.6%, rgba(255, 203, 62, 1) 48.8%, rgba(170, 99, 5, 0.68) 53.2%, rgba(30, 16, 2, 0.98) 69%),
+        radial-gradient(circle at 23% 19%, transparent 0 46.1%, rgba(255, 207, 71, 1) 48.4%, rgba(178, 103, 6, 0.7) 53.4%, rgba(30, 16, 2, 0.98) 69%),
         radial-gradient(circle at 12% 12%, rgba(255, 221, 106, 0.92) 0 1.4%, rgba(255, 180, 21, 0.55) 5%, transparent 12%),
         radial-gradient(circle at 37% 31%, rgba(255, 187, 33, 0.25), rgba(25, 10, 2, 0.95) 56%, #050302 100%);
     box-shadow:
         0 0 22px rgba(255, 217, 97, 0.98),
-        0 0 66px rgba(255, 174, 16, 0.86),
-        0 0 150px rgba(255, 151, 0, 0.44);
+        0 0 64px rgba(255, 174, 16, 0.82),
+        0 0 146px rgba(255, 151, 0, 0.42);
     animation: float-gold 22s ease-in-out infinite;
     opacity: 0.98;
 }
@@ -177,8 +177,8 @@ a {
     background: radial-gradient(circle at 20% 18%, rgba(255, 208, 73, 0.42), transparent 33%);
     filter: blur(2px);
     box-shadow:
-        0 0 36px rgba(255, 201, 69, 0.85),
-        0 0 110px rgba(255, 157, 0, 0.48);
+        0 0 38px rgba(255, 205, 75, 0.88),
+        0 0 104px rgba(255, 157, 0, 0.44);
     animation: float-gold 22s ease-in-out infinite;
 }
 
@@ -407,29 +407,29 @@ a {
 
 .headline-line-2::before {
     bottom: 8px;
-    width: 204px;
-    height: 4px;
+    width: 174px;
+    height: 2px;
     transform: translateX(-50%);
     border-radius: 999px;
-    background: linear-gradient(90deg, transparent 0%, rgba(218, 128, 8, 0.2) 14%, rgba(255, 198, 50, 0.82) 34%, #FFF4B8 50%, rgba(255, 198, 50, 0.82) 66%, rgba(218, 128, 8, 0.2) 86%, transparent 100%);
-    filter: blur(0.25px);
+    background: linear-gradient(90deg, transparent 0%, rgba(218, 128, 8, 0.14) 12%, rgba(255, 198, 50, 0.62) 34%, #FFF5BC 50%, rgba(255, 198, 50, 0.62) 66%, rgba(218, 128, 8, 0.14) 88%, transparent 100%);
+    filter: blur(0.45px);
     box-shadow:
-        0 0 8px rgba(255, 218, 89, 0.9),
-        0 0 20px rgba(255, 171, 14, 0.68),
-        0 0 42px rgba(255, 137, 0, 0.34);
+        0 0 7px rgba(255, 218, 89, 0.82),
+        0 0 16px rgba(255, 171, 14, 0.54),
+        0 0 32px rgba(255, 137, 0, 0.24);
 }
 
 /* Subtitle */
 .subtitle {
     max-width: 430px;
     margin-bottom: clamp(42px, 5vh, 58px);
-    color: #D0D0D0;
+    color: #D8D8D8;
     font-family: 'Inter', sans-serif;
     font-size: clamp(21px, 3vh, 30px);
     font-weight: 400;
     line-height: 1.48;
     text-align: center;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.78), 0 0 10px rgba(255, 255, 255, 0.05);
     animation: headline-up 0.8s ease-out 0.36s both;
 }
 
@@ -461,8 +461,8 @@ a {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow:
-        0 0 18px rgba(49, 203, 255, 0.65),
-        0 0 42px rgba(0, 143, 255, 0.34),
+        0 0 15px rgba(49, 203, 255, 0.6),
+        0 0 36px rgba(0, 143, 255, 0.3),
         0 18px 40px rgba(0, 0, 0, 0.42),
         inset 0 1px 0 rgba(255, 255, 255, 0.38),
         inset 0 -16px 22px rgba(0, 68, 165, 0.22);
@@ -498,8 +498,8 @@ a {
     transform: translateY(-2px);
     filter: brightness(1.04);
     box-shadow:
-        0 0 26px rgba(49, 203, 255, 0.78),
-        0 0 58px rgba(0, 143, 255, 0.42),
+        0 0 22px rgba(49, 203, 255, 0.72),
+        0 0 49px rgba(0, 143, 255, 0.36),
         0 20px 46px rgba(0, 0, 0, 0.48);
 }
 
@@ -622,15 +622,15 @@ a {
     0%, 100% {
         box-shadow:
             0 0 18px rgba(49, 203, 255, 0.65),
-            0 0 42px rgba(0, 143, 255, 0.34),
+            0 0 36px rgba(0, 143, 255, 0.3),
             0 18px 40px rgba(0, 0, 0, 0.42),
             inset 0 1px 0 rgba(255, 255, 255, 0.38),
             inset 0 -16px 22px rgba(0, 68, 165, 0.22);
     }
     50% {
         box-shadow:
-            0 0 26px rgba(49, 203, 255, 0.78),
-            0 0 62px rgba(0, 143, 255, 0.46),
+            0 0 22px rgba(49, 203, 255, 0.72),
+            0 0 53px rgba(0, 143, 255, 0.39),
             0 18px 40px rgba(0, 0, 0, 0.42),
             inset 0 1px 0 rgba(255, 255, 255, 0.42),
             inset 0 -16px 22px rgba(0, 68, 165, 0.22);
@@ -728,7 +728,7 @@ a {
     }
 
     .headline-line-2::before {
-        width: 196px;
+        width: 170px;
         bottom: 8px;
     }
 
